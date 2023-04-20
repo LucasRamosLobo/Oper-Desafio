@@ -1,9 +1,12 @@
 import mongoose from "mongoose";
 
-const ClientSchema = new mongoose.Schema({
+const CommentSchema = new mongoose.Schema({
   email: String,
   content: String,
-  likes: Number,
+  likes: {
+    type: Number,
+    default: 0,
+  },
   id_notice: String,
   createdAt: {
     type: Date,
@@ -11,14 +14,15 @@ const ClientSchema = new mongoose.Schema({
   },
 });
 
-let Posts;
+
+let Comment;
 
 try {
-  // Tenta obter o modelo 'Client' compilado
-  Posts = mongoose.model('Client');
+  // Tenta obter o modelo 'Comment' compilado
+  Comment = mongoose.model('Comment');
 } catch {
-  // Se o modelo 'Client' não existir, compila-o com o esquema 'ClientSchema'
-  Posts = mongoose.model('Client', ClientSchema);
+  // Se o modelo 'Comment' não existir, compila-o com o esquema 'CommentSchema'
+  Comment = mongoose.model('Comment', CommentSchema);
 }
 
-export default Posts;
+export default Comment;
