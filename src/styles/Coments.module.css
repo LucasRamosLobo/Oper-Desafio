@@ -6,24 +6,46 @@
     border: 1px solid #ccc;
     border-radius: 10px;
   }
-    
-.like_button {
-    display: inline-block;
-    border: none;
-    border-radius: 4px;
-    background-color: #0070f3;;
-    color: #ffffff;
+  .like_button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #000000;
     font-size: 16px;
-    padding: 8px 16px;
+    padding: 10px;
     margin-right: 10px;
     margin-top: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   }
   
   .like_button:hover {
-    background-color: #333;
-    color: white;
+    background-color: #e6e6e6;
+    color: #000000;
+    border-color: #e6e6e6;
+  }
+  
+  .like_button.clicked {
+    background-color: #ffffff;
+    border-color: #dc3545;
+    color: #dc3545;
+  }
+  
+  .like_button.clicked svg path {
+    fill: #dc3545;
+  }
+  
+  .like_button svg {
+    width: 20px;
+    height: 20px;
+    transition: fill 0.3s ease;
+  }
+  
+  .like_button:hover svg path {
+    fill: #ff0000;
   }
   .form_label {
     display: block;
@@ -44,7 +66,45 @@
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
+  .reply_button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    background-color: transparent;
+    color: #262626;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
   
+  .reply_button:hover {
+    background-color: #fafafa;
+  }
+  
+  .reply_button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #b2dffc;
+  }
+  
+  .reply_button svg {
+    fill: none;
+    stroke: #262626;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    transition: stroke 0.3s ease;
+  }
+  
+  .reply_button:hover svg {
+    stroke: #b2dffc;
+  }
   .form_input:focus {
     outline: 0;
     border-color: #0070f3;

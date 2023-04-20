@@ -89,7 +89,7 @@ const Article: NextPage<ArticleProps> = ({ id, title, content, comments, respons
               onChange={(event) => setComment(event.target.value)}
             />
           </div>
-          <button type="submit" className={styles.form_submit}>Enviar</button>
+          <button type="submit" className={styles.button}>Enviar</button>
         </form>
       </div>
     </>
