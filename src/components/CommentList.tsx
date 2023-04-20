@@ -15,30 +15,33 @@ interface CommentListProps {
 }
 
 const CommentList: React.FC<CommentListProps> = ({ comments, postId }) => {
-  const [likes, setLikes] = useState<number>(0); // estado para guardar o valor de likes
+  const [commentList, setCommentList] = useState(comments.data); // estado para guardar a lista de comentários atualizada
 
   useEffect(() => {
-    // Carrega o valor inicial de likes
-    const commentLikes = comments.data.filter((comment) => comment.id_notice === postId)[0]?.likes;
-    if (commentLikes) {
-      setLikes(commentLikes);
-    }
+    // Carrega a lista de comentários inicial
+    setCommentList(comments.data);
   }, []);
 
   const handleLike = async (id) => {
-    
     try {
       const response = await fetch(`/api/posts/`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ _id:id })
+        body: JSON.stringify({ _id: id })
       });
       const data = await response.json();
-      console.log(id)
       if (data.success) {
-        setLikes((prevLikes) => prevLikes + 1); // atualiza o estado de likes
+        // Atualiza o número de curtidas no objeto de comentário correspondente
+        const updatedComments = commentList.map(comment => {
+          if (comment._id === id) {
+            return { ...comment, likes: comment.likes + 1 };
+          } else {
+            return comment;
+          }
+        });
+        setCommentList(updatedComments); // atualiza a lista de comentários
       }
     } catch (error) {
       console.error(error);
@@ -47,7 +50,7 @@ const CommentList: React.FC<CommentListProps> = ({ comments, postId }) => {
 
   return (
     <div className={styles.comment_list}>
-      {comments.data.filter((comment) => comment.id_notice === postId).map((comment) => (
+      {commentList.filter((comment) => comment.id_notice === postId).map((comment) => (
         <div key={comment._id} className={styles.comment_item}>
           <p>
             <strong>{comment.email}</strong>
