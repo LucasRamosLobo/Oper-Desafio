@@ -27,7 +27,7 @@ interface ArticleProps {
   responses: Response[];
 }
 
-const Article: NextPage<ArticleProps> = ({ id, title, content, comments, responses }) => {
+const Article: NextPage<ArticleProps> = ({ id, title, content, author, comments, responses }) => {
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
   const [commentList, setCommentList] = useState(comments);
@@ -65,9 +65,10 @@ const Article: NextPage<ArticleProps> = ({ id, title, content, comments, respons
       <Header />
       <div className={styles.container}>
         <h1 className={styles.title}>{title}</h1>
+        <p>{author}</p>
         <p className={styles.comment}>{content}</p>
         <h2 className={styles.h2}>Comentários:</h2>
-        <CommentList comments={commentList} postId={id} response={responses} />
+        <CommentList comments={commentList} postId={id} response={responses} likes={commentList.data.likes} />
         <h2 className={styles.h2}>Adicionar comentário:</h2>
         <form className={styles.form_container} onSubmit={handleSubmit}>
           <div className={styles.form_group}>
@@ -114,6 +115,7 @@ export const getServerSideProps: GetServerSideProps<ArticleProps> = async ({
       id: article.id,
       title: article.title,
       content: article.content,
+      author: article.author,
       comments,
       responses,
     },

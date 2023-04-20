@@ -95,7 +95,7 @@
 .comment {
   margin-top: 20px;
   padding: 10px;
-  border: 1px solid black;
+  border: none;
   border-radius: 20px;
   background-color: #fff;
   font-family: "Open Sans", sans-serif;
