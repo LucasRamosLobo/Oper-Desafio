@@ -27,7 +27,7 @@ interface ArticleProps {
   responses: Response[];
 }
 
-const Article: NextPage<ArticleProps> = ({ id, title, content, comments }) => {
+const Article: NextPage<ArticleProps> = ({ id, title, content, comments, responses }) => {
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
   const [commentList, setCommentList] = useState(comments);
@@ -67,7 +67,7 @@ const Article: NextPage<ArticleProps> = ({ id, title, content, comments }) => {
         <h1 className={styles.title}>{title}</h1>
         <p className={styles.comment}>{content}</p>
         <h2 className={styles.h2}>Comentários:</h2>
-        <CommentList comments={commentList} postId={id} />
+        <CommentList comments={commentList} postId={id} response={responses} />
         <h2 className={styles.h2}>Adicionar comentário:</h2>
         <form className={styles.form_container} onSubmit={handleSubmit}>
           <div className={styles.form_group}>
@@ -100,12 +100,14 @@ export const getServerSideProps: GetServerSideProps<ArticleProps> = async ({
   query,
 }) => {
   const id = query.id as string;
-  const [articleRes, commentsRes] = await Promise.all([
+  const [articleRes, commentsRes, resComments] = await Promise.all([
     fetch(`https://news-api.lublot.dev/api/posts/${id}`),
     fetch(`http://localhost:3000/api/posts`),
+    fetch('http://localhost:3000/api/posts/responses'),
   ]);
   const article = await articleRes.json();
   const comments = await commentsRes.json();
+  const responses = await resComments.json();
 
   return {
     props: {
@@ -113,7 +115,7 @@ export const getServerSideProps: GetServerSideProps<ArticleProps> = async ({
       title: article.title,
       content: article.content,
       comments,
-      responses: [],
+      responses,
     },
   };
 };

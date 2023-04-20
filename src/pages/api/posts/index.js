@@ -19,7 +19,6 @@ export default async function handler(req, res) {
         try {
           const { _id } = req.body;
           const comment = await Comment.findById(_id);
-      console.log(comment)
           if (!comment) throw "comment not found";
           comment.likes += 1;
           await comment.save();
