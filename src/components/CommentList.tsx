@@ -4,32 +4,21 @@ import styles from '../styles/Coments.module.css';
 interface CommentListProps {
   comments: object
   postId: string;
-  response:object // new prop for the URL id
+  response:object 
 }
 
 const CommentList: React.FC<CommentListProps> = ({ comments, postId, response }) => {
-  const [commentList, setCommentList] = useState(comments.data); // estado para guardar a lista de comentários atualizada
-  const [replyCommentId, setReplyCommentId] = useState("");// estado para guardar o ID do comentário que está sendo respondido
-  const [showReplyForm, setShowReplyForm] = useState(""); // estado para mostrar ou ocultar o formulário de resposta
+  const [commentList, setCommentList] = useState(comments.data); 
+  const [replyCommentId, setReplyCommentId] = useState("");
+  const [showReplyForm, setShowReplyForm] = useState(""); 
   const [responsesList, setResponsesList] = useState(response);
-  const [likesUpdated, setLikesUpdated] = useState({}); // estado para armazenar as informações de curtida atualizadas para cada comentário
+  
 
   useEffect(() => {
     // Carrega a lista de comentários inicial
     setCommentList(comments.data);
   }, []);
 
-  useEffect(() => {
-    // Atualiza as informações de curtida para cada comentário sempre que o estado de comentários é atualizado
-    const likes = {};
-    commentList.forEach((comment) => {
-      likes[comment._id] = {
-        likes: comment.likes,
-        isLiked: false,
-      };
-    });
-    setLikesUpdated(likes);
-  }, [commentList]);
 
   const handleLike = async (id) => {
     try {
@@ -112,7 +101,7 @@ const CommentList: React.FC<CommentListProps> = ({ comments, postId, response })
             return response;
           }
         });
-        setResponsesList({ data: updatedResponses }); // updates the response list
+        setResponsesList({ data: updatedResponses }); 
       }
     } catch (error) {
       console.error(error);
