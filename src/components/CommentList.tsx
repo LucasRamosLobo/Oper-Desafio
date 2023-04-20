@@ -81,6 +81,30 @@ const CommentList: React.FC<CommentListProps> = ({ comments, postId, response })
       console.error(error);
     }
   };
+  const handleLike2 = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/posts/responses/`, { // PUT request to update the likes of a response
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id })
+      });
+      const data = await response.json();
+      if (data.success) {
+        const updatedResponses = responsesList.data.map(response => {
+          if (response._id === id) {
+            return { ...response, likes: response.likes + 1 };
+          } else {
+            return response;
+          }
+        });
+        setResponsesList({ data: updatedResponses }); // updates the response list
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const filteredComments = comments.data.filter(comment => comment.id_notice === postId);
 

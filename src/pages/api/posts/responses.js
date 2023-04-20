@@ -27,7 +27,18 @@ export default async function handler(req, res) {
       console.error(error);
       res.status(500).json({ success: false, error });
     }
-  } else {
-    res.status(405).json({ message: 'Método não permitido' });
+} else if (req.method === 'PUT') {
+    try {
+      const { id } = req.body;
+      const comment = await Response.findById(id);
+      if (!comment) throw new Error("comment not found");
+      comment.likes += 1;
+      await comment.save();
+  
+      res.status(200).json({ success: true, data: comment });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ success: false, error });
+    }
   }
 }
