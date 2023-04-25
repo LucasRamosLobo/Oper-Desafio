@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import styles from '../styles/Home.module.css';
-import Header from '../components/Header';
+import Header from '../components/Nav';
 import Image from "next/image";
 
 interface Article {
