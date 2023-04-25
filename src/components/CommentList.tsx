@@ -3,7 +3,7 @@ import styles from '../styles/Coments.module.css';
 
 interface CommentListProps {
   comments: object
-  postId: string;
+  postId: number;
   response:object 
 }
 

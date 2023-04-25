@@ -69,7 +69,7 @@ const Article: NextPage<ArticleProps> = ({ id, title, content, author, comments,
         <p>{author}</p>
         <p className={styles.comment}>{content}</p>
         <h2 className={styles.h2}>Comentários:</h2>
-        <CommentList comments={commentList} postId={id} response={responses} likes={commentList.data.likes} />
+        <CommentList comments={commentList} postId={id} response={responses} />
         <h2 className={styles.h2}>Adicionar comentário:</h2>
         <form className={styles.form_container} onSubmit={handleSubmit}>
           <div className={styles.form_group}>
