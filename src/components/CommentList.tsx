@@ -125,7 +125,7 @@ const CommentList: React.FC<CommentListProps> = ({ comments, postId, response })
               <span>{comment.createdAt}</span>
               <div>
                 {likesUpdated.map((comment2) => (
-                  <button className={`${styles.like_button} ${comment2.isLiked ? 'clicked' : ''}`} onClick={() => handleLike(comment2._id)}>
+                  <button key={comment2} className={`${styles.like_button} ${comment2.isLiked ? 'clicked' : ''}`} onClick={() => handleLike(comment2._id)}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-heart">
                     <path d="M20.84 4.83a5.5 5.5 0 0 0-7.78 0L12 5.68l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.78l8.84-8.83a5.5 5.5 0 0 0 0-7.78z"></path>
                   </svg>
