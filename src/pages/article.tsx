@@ -4,6 +4,20 @@ import styles from "../styles/Article.module.css";
 import Header from "../components/Nav";
 import CommentList from '../components/CommentList';
 
+interface Comment {
+  likes: number;
+  id: number;
+  id_notice: string;
+  email: string;
+  content: string;
+}
+
+interface Response {
+  id: number;
+  post: number;
+  email: string;
+  content: string;
+}
 
 interface ArticleProps {
   id: number;
@@ -11,6 +25,7 @@ interface ArticleProps {
   content: string;
   comments: Comment[];
   responses: Response[];
+  author: string;
 }
 
 const Article: NextPage<ArticleProps> = ({ id, title, content, author, comments, responses }) => {
